@@ -1,0 +1,82 @@
+{% extends "template.html" %}
+{% block conteudo %}
+
+<script>
+    function changeColor(element) {
+        var isYellow = element.classList.contains("yellow");
+
+        if (isYellow || element.style.color=="yellow") {
+            // Remove a classe "yellow" para alterar a cor para cinza
+            element.classList.remove("yellow");
+            element.style.color = "#808080";
+        } else {
+            // Adiciona a classe "yellow" para alterar a cor para amarelo
+            element.classList.add("yellow");
+            element.style.color = "";
+        }
+
+        // Obtém o valor da moeda na qual foi clicado
+        var moeda = element.parentNode.parentNode.cells[0].textContent;
+
+        // Envia uma requisição para o servidor Flask para realizar o update
+        fetch('/atualizar_tabela', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                moeda: moeda
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                // O update foi bem-sucedido, faça qualquer manipulação adicional aqui
+                console.log('Update realizado com sucesso!');
+            } else {
+                // Ocorreu um erro no update, trate-o adequadamente
+                console.error('Erro ao realizar o update:', response.status);
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao realizar o update:', error);
+        });
+    }
+</script>
+
+<div class="listagem">
+    <h1>Tabela de Preços</h1>
+    <span style="color: white;justify-content: center;align-items: center;display: flex;font-size: 15px;margin-bottom: 15px;">Ultima Atualização: {{ ultatualiz }}</span>
+    <div class="conttable">
+        <table class="table table-striped table-responsive table-bordered">
+            <thead class="thead-default">
+                <tr>
+                    <th>Pair Moeda</th>
+                    <th>Vlr De</th>
+                    <th>Vlr Para</th>
+                    <th>Variação (3m)</th>
+                    <th>Favorita</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vlr in valores %}
+                <tr>
+                    <td>{{ vlr[0] }}</td>
+                    <td>{{ vlr[1] }}</td>
+                    <td>{{ vlr[2] }}</td>
+                    {% if vlr[3] >= 0%}
+                    <td class="positive">{{ vlr[3] }}% &#9650;</td>
+                    {% else %}
+                    <td class="negative">{{ vlr[3] }}% &#9660;</td>
+                    {% endif %}
+                    {% if vlr[4] == 'S' %}
+                    <td class="centered-cell"><span class="favorite-star" style="color: yellow;" onclick="changeColor(this)">★</span></td>
+                    {% else %}
+                    <td class="centered-cell"><span class="favorite-star" onclick="changeColor(this)">★</span></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

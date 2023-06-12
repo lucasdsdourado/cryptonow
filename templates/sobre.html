@@ -1,0 +1,31 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<style>
+  .profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+  h2 {
+    color: white;
+  }
+</style>
+<div>
+  <img src="{{ url_for('static', filename='images/eu.jpg') }}" alt="Minha foto" class="profile-pic">
+</div>
+
+<div>
+  <h2 class="mt-5">Tema escolhido</h2>
+  <p style="color: white;">Visualização de Preço de Cryptomoedas com Python/Flask.</p>
+
+  <h2>Objetivo do projeto</h2>
+  <p style="color: white;">Consultar a API da corretora BYBIT e disponibilizar os dados de pair moedas, demonstrando a variação a cada 3 minutos.</p>
+
+  <h2>Nome completo</h2>
+  <p style="color: white;">LUCAS DOS SANTOS DOURADO</p>
+
+  <h2>Código da matrícula</h2>
+  <p style="color: white;">2840482023022</p>
+</div>
+
+{% endblock %}

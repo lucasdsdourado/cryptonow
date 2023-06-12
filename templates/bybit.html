@@ -1,0 +1,56 @@
+{% extends "template.html" %}
+{% block conteudo %}
+<style>
+ul {
+  list-style-type:circle;
+}
+
+li {
+  margin-bottom: 10px;
+  color:#b9b2ab; 
+}
+
+.bybit-logo {
+  max-width: 100px;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  margin-top: 30px;
+}
+
+.button-container a button {
+  padding: 10px 20px;
+  background-color: #FF6A00;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.button-container a button:hover {
+  background-color: #E65100;
+}
+  </style>
+</head>
+<body>
+  <h1>Plataforma Bybit</h1>
+  <img class="bybit-logo" src="{{ url_for('static', filename='images/logobybit.jpg') }}" alt="Logo Bybit">
+  <p style="color: #d4d0d0; width: 80vh;">A plataforma Bybit é uma poderosa ferramenta de negociação de criptomoedas que oferece a possibilidade de criar e executar bots de negociação de forma gratuita. Com o Bybit, você pode automatizar suas estratégias de negociação, facilitando a execução de operações e otimizando seus resultados.</p>
+  <p style="color: #d4d0d0; width: 80vh;">Aqui estão alguns recursos oferecidos pelo Bybit:</p>
+  <ul>
+    <li>Interface intuitiva e amigável para configurar e gerenciar seus bots de negociação.</li>
+    <li>Acesso a dados de mercado em tempo real para tomar decisões informadas.</li>
+    <li>Opções de personalização avançadas para ajustar e refinar suas estratégias de negociação.</li>
+    <li>Capacidade de backtesting para testar suas estratégias em dados históricos.</li>
+    <li>Recursos de gerenciamento de risco para proteger seu capital.</li>
+    <li>Integração com diferentes exchanges para acessar uma variedade de pares de negociação.</li>
+  </ul>
+  <p style="color: #d4d0d0; width: 80vh;">Crie uma conta gratuita no Bybit agora mesmo e comece a construir seu próprio trading bot:</p>
+  <div class="button-container">
+    <a href="https://www.bybit.com/" target="_blank"><button>Acessar Bybit</button></a>
+    <a href="https://bybit-exchange.github.io/docs/v5/intro" target="_blank"><button>Documentação API</button></a>
+  </div>
+
+{% endblock %}
